@@ -3,41 +3,12 @@ import {Reducer} from "redux";
 import distributeItems from "./distributeItems";
 import initialState from "../initialState";
 import {APPEND, DELETE, DISTRIBUTE} from "../actionTypes";
+import {Payload, State, Table} from "../types";
 
-interface RowWithoutTypeAndID {
-    name: string,
-    cost: number,
-}
-
-interface Row extends RowWithoutTypeAndID{
-    type: string | null
-}
-
-interface Table {
-    [id: string]: Row
-}
-
-interface State {
-    table: Table
-}
 
 function clearDistribution(table: Table): Table {
     return Object.fromEntries(Object.entries(table).map(([id, val]) => [id, {...val, type: null}]));
 }
-
-interface Append {
-    type: 'APPEND',
-    item: RowWithoutTypeAndID
-}
-interface Delete {
-    type: 'DELETE',
-    id: string
-}
-interface Distribute {
-    type: 'DISTRIBUTE'
-}
-
-type Payload = Append | Delete | Distribute
 
 const reducer: Reducer<State, Payload> = (state: State | undefined, action) => {
     if (typeof state === "undefined") {
@@ -68,4 +39,3 @@ const reducer: Reducer<State, Payload> = (state: State | undefined, action) => {
 }
 
 export default reducer;
-export type {State, RowWithoutTypeAndID, Row}

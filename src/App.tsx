@@ -1,21 +1,16 @@
-import {FC} from 'react'
 import './App.css';
 import Table from './components/Table'
 import Form from "./components/Form";
-import {Provider} from "react-redux";
-import store from "./store/store";
 
-const App : FC = () => {
+const App = () => {
 
   return (
       <div className="App">
-          <Provider store={store}>
-            <Form />
-            <Table />
-          </Provider>
+        <Form />
+        <Table />
       </div>
   );
-}
+};
 
 
 export default App;

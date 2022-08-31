@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import {State} from "../store/reducers/rootReducer";
+import type {State} from "../store";
 import TableRow from "./TableRow";
 import "../styles/Table.css"
 

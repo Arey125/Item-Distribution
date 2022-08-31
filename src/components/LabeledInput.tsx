@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface Props {
+type Props = {
     type: string,
     name: string,
     value: string,
@@ -18,6 +18,6 @@ const LabeledInput: React.FC<Props> = ({type, name, value, setValue}) => {
             />
         </label>
     );
-}
+};
 
 export default LabeledInput;

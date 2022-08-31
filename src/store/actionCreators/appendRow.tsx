@@ -1,11 +1,9 @@
 import {APPEND} from "../actionTypes";
-import {RowWithoutTypeAndID} from "../reducers/rootReducer";
+import {Item} from "../types";
 
-function appendRow(item: RowWithoutTypeAndID) {
+export function appendRow(item: Item) {
     return {
         type: APPEND,
         item: item
     };
 }
-
-export default appendRow;

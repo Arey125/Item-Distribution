@@ -1,10 +1,9 @@
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {useDispatch} from "react-redux";
 
 import LabeledInput from "./LabeledInput";
 
-import appendRow from "../store/actionCreators/appendRow";
-import distribute from "../store/actionCreators/distribute"
+import {appendRow, distribute} from "../store";
 
 const Form = () => {
     const dispatch = useDispatch();
@@ -16,7 +15,7 @@ const Form = () => {
     }, [name, cost, dispatch]);
 
     return (
-        <div>
+        <>
             <LabeledInput
                 type="text"
                 name="Название"
@@ -29,13 +28,13 @@ const Form = () => {
                 value={cost}
                 setValue={setCost}
             />
-            <button id="add-button" onClick={addLine}>
+            <button onClick={addLine}>
                 Добавить
             </button>
-            <button id="distribute-button" onClick={() => dispatch(distribute())}>
+            <button onClick={() => dispatch(distribute())}>
                 Распределить
             </button>
-        </div>
+        </>
     );
 }
 

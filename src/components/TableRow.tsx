@@ -1,13 +1,12 @@
-import React from 'react';
-import {State} from "../store/reducers/rootReducer";
+import {deleteRow} from "../store";
+import type {State} from "../store";
 import {useDispatch, useSelector} from "react-redux";
-import deleteRow from "../store/actionCreators/deleteRow";
 
-interface Props {
+type Props = {
     id: string
 }
 
-const TableRow: React.FC<Props> = ({id}) => {
+const TableRow = ({id}: Props) => {
     const dispatch = useDispatch();
     const {name, cost, type} = useSelector((state: State) => state.table[id])
 
@@ -18,7 +17,6 @@ const TableRow: React.FC<Props> = ({id}) => {
     return (
         <tr
             className={type === null ? undefined : type}
-            key={id}
             onDoubleClick={deleteThisRow}
         >
             <td>{name}</td>

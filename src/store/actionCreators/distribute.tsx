@@ -1,6 +1,6 @@
 import {DISTRIBUTE} from "../actionTypes";
 
-export default function distribute() {
+export function distribute() {
     return {
         type: DISTRIBUTE
     };
