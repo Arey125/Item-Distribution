@@ -1,7 +1,7 @@
-import {DISTRIBUTE} from "../actionTypes";
+import { DISTRIBUTE } from "../actionTypes";
 
 export function distribute() {
-    return {
-        type: DISTRIBUTE
-    };
+  return {
+    type: DISTRIBUTE,
+  };
 }

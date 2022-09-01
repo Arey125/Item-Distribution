@@ -1,7 +1,5 @@
-export type {Row, Item, Table, State} from "./types"
+export type { Row, Item, Table, State } from "./types";
 
-export {appendRow} from "./actionCreators/appendRow"
-export {deleteRow} from "./actionCreators/deleteRow"
-export {distribute} from "./actionCreators/distribute"
+export * from "./actionCreators";
 
-export {store} from "./store";
+export { store } from "./store";

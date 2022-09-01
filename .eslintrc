@@ -33,11 +33,14 @@
         "**/storybook/**/*.tsx"
       ],
       "rules": {
-        "import/no-extraneous-dependencies": "off"
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": true, "peerDependencies": true}],
       }
     }
   ],
   "rules": {
+    "no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+    "no-continue": "off",
+    "no-labels": "off",
     "prettier/prettier": ["error"],
     "no-console": ["error", { "allow": ["error"] }],
     "react/react-in-jsx-scope": "off",

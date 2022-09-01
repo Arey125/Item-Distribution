@@ -1,9 +1,9 @@
-import {APPEND} from "../actionTypes";
-import {Item} from "../types";
+import { APPEND } from "../actionTypes";
+import { Item } from "../types";
 
 export function appendRow(item: Item) {
-    return {
-        type: APPEND,
-        item: item
-    };
+  return {
+    type: APPEND,
+    item,
+  };
 }

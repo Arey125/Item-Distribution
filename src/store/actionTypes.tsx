@@ -1,3 +1,3 @@
 export const APPEND = "APPEND";
 export const DELETE = "DELETE";
-export const DISTRIBUTE = "DISTRIBUTE"
+export const DISTRIBUTE = "DISTRIBUTE";

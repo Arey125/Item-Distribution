@@ -6,3 +6,32 @@
   height: 40vmin;
   pointer-events: none;
 }
+
+
+#object-table {
+  margin-top: 10px;
+}
+
+table,
+th,
+td {
+  border: black solid 1px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 3px 10px 3px 10px;
+}
+
+.red {
+  background-color: lightcoral;
+}
+
+.green {
+  background-color: lightgreen;
+}
+
+.blue {
+  background-color: lightskyblue;
+}
