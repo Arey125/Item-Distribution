@@ -1,4 +1,5 @@
 import React from "react";
+import {TextField} from "@mui/material";
 
 type Props = {
   type: string;
@@ -8,14 +9,13 @@ type Props = {
 };
 
 const LabeledInput: React.FC<Props> = ({ type, name, value, setValue }) => (
-  <label>
-    {name}
-    <input
-      type={type}
-      value={value}
-      onChange={(event) => setValue(event.target.value)}
+    <TextField
+        label={name}
+        inputProps={type === 'text' ? undefined : { inputMode: 'numeric', pattern: '[0-9]*' }}
+        value={value}
+        size="small"
+        onChange={event => setValue(event.target.value)}
     />
-  </label>
 );
 
 export default LabeledInput;
