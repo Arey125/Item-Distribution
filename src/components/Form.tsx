@@ -14,6 +14,11 @@ export const Form = () => {
     dispatch(appendRow({ name, cost: Number(cost) }));
   }, [name, cost, dispatch]);
 
+  const distributeButtonCallback = useCallback(
+    () => dispatch(distribute()),
+    [dispatch]
+  );
+
   return (
     <Box justifyContent="flex-start" sx={{ flexGrow: 1 }} width={300}>
       <Grid
@@ -44,7 +49,7 @@ export const Form = () => {
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Button variant="contained" onClick={() => dispatch(distribute())}>
+          <Button variant="contained" onClick={distributeButtonCallback}>
             Распределить
           </Button>
         </Grid>

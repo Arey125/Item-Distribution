@@ -1,5 +1,5 @@
-import React from "react";
-import { TextField } from "@mui/material";
+import React, { ChangeEventHandler } from "react";
+import { InputBaseComponentProps, TextField } from "@mui/material";
 
 type Props = {
   type: string;
@@ -8,16 +8,25 @@ type Props = {
   setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const LabeledInput: React.FC<Props> = ({ type, name, value, setValue }) => (
-  <TextField
-    label={name}
-    inputProps={
-      type === "text" ? undefined : { inputMode: "numeric", pattern: "[0-9]*" }
-    }
-    value={value}
-    size="small"
-    onChange={(event) => setValue(event.target.value)}
-  />
-);
+const INPUT_PARAMS: InputBaseComponentProps = {
+  inputMode: "numeric",
+  pattern: "[0-9]*",
+};
+
+const LabeledInput = ({ type, name, value, setValue }: Props) => {
+  // @ts-ignore
+  const textChange: ChangeEventHandler<HTMLInputElement> = (event) => {
+    setValue(event.target.value);
+  };
+  return (
+    <TextField
+      label={name}
+      inputProps={type === "text" ? undefined : INPUT_PARAMS}
+      value={value}
+      size="small"
+      onChange={textChange}
+    />
+  );
+};
 
 export default LabeledInput;
