@@ -1,4 +1,5 @@
 import { v4 as uuid } from "uuid";
+import { Action, createReducer } from "@reduxjs/toolkit";
 
 import distributeItems from "./distributeItems";
 import initialState from "../initialState";
@@ -11,25 +12,19 @@ function clearDistribution(table: Table): Table {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/default-param-last
-const reducer = (state: State | undefined = initialState, action: Payload) => {
-  if (typeof state === "undefined") {
-    return initialState;
-  }
-  let { table } = state;
-  table = clearDistribution(table);
-  switch (action.type) {
-    case APPEND:
-      return { table: { ...table, [uuid()]: { ...action.item, type: null } } };
-
-    case DELETE: {
-      const { id } = action;
-      const { [id]: val, ...newTable } = table;
-      return { table: newTable };
-    }
-
-    case DISTRIBUTE: {
-      const entries = Object.entries(table);
+const reducer = createReducer<State>(initialState, (builder) => {
+  builder
+    .addCase(APPEND, (state: State, { item }: Payload & Action<"APPEND">) => {
+      state.table = clearDistribution(state.table);
+      state.table[uuid()] = { ...item, type: null };
+    })
+    .addCase(DELETE, (state, { id }: Payload & Action<"DELETE">) => {
+      state.table = clearDistribution(state.table);
+      delete state.table[id];
+    })
+    .addCase(DISTRIBUTE, (state: State) => {
+      state.table = clearDistribution(state.table);
+      const entries = Object.entries(state.table);
       const values = entries.map(([, { cost }]) => cost);
       const [, indices] = distributeItems(values);
       const types = ["red", "green", "blue"];
@@ -37,12 +32,8 @@ const reducer = (state: State | undefined = initialState, action: Payload) => {
         id,
         { ...val, type: types[indices[ind]] },
       ]);
-      return { table: Object.fromEntries(entriesWithDistribution) as Table };
-    }
-
-    default:
-      return { table };
-  }
-};
+      state.table = Object.fromEntries(entriesWithDistribution) as Table;
+    });
+});
 
 export default reducer;

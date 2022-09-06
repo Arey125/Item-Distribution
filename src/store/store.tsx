@@ -1,4 +1,4 @@
-import { legacy_createStore as createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 // eslint-disable-next-line import/no-internal-modules
 import storage from "redux-persist/lib/storage";
@@ -16,5 +16,8 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 
-export const store = createStore(persistedReducer);
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+
 export const persistor = persistStore(store);
