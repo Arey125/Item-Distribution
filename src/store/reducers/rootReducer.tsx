@@ -1,4 +1,3 @@
-import { Reducer } from "redux";
 import { v4 as uuid } from "uuid";
 
 import distributeItems from "./distributeItems";
@@ -12,7 +11,8 @@ function clearDistribution(table: Table): Table {
   );
 }
 
-const reducer: Reducer<State, Payload> = (state: State | undefined, action) => {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+const reducer = (state: State | undefined = initialState, action: Payload) => {
   if (typeof state === "undefined") {
     return initialState;
   }
