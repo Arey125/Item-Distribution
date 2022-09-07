@@ -1,35 +1,40 @@
-import { useDispatch, useSelector } from "react-redux";
 import { TableRow as MUITableRow, TableCell } from "@mui/material";
 
-import { deleteRow } from "../store";
-import type { State } from "../store";
+import { useCallback } from "react";
+import { useAppDispatch, useAppSelector, deleteRow } from "../store";
+import type { TState } from "../store";
 
-type Props = {
+type TProps = {
   id: string;
 };
 
-const TableRow = ({ id }: Props) => {
-  const dispatch = useDispatch();
-  const { name, cost, type } = useSelector((state: State) => state.table[id]);
-  const backgroundColor =
-    type &&
-    {
-      red: "#fad2d2",
-      green: "#e3fbe3",
-      blue: "#e3f4fe",
-    }[type];
+type TBackgroundColor = {
+  backgroundColor: string;
+};
 
-  const deleteThisRow = () => {
+type TBackgroundColorDict = {
+  [id: string]: TBackgroundColor;
+};
+
+const ROW_STYLE: TBackgroundColorDict = {
+  red: { backgroundColor: "#fad2d2" },
+  green: { backgroundColor: "#e3fbe3" },
+  blue: { backgroundColor: "#e3f4fe" },
+};
+
+const TableRow = ({ id }: TProps) => {
+  const dispatch = useAppDispatch();
+  const { name, cost, type } = useAppSelector(
+    (state: TState) => state.table[id]
+  );
+  const backgroundColor = type && ROW_STYLE[type];
+
+  const deleteThisRow = useCallback(() => {
     dispatch(deleteRow(id));
-  };
+  }, [id, dispatch]);
 
   return (
-    <MUITableRow
-      sx={{ backgroundColor }}
-      className={type === null ? undefined : type}
-      key={id}
-      onDoubleClick={deleteThisRow}
-    >
+    <MUITableRow sx={{ ...backgroundColor }} onDoubleClick={deleteThisRow}>
       <TableCell>{name}</TableCell>
       <TableCell>{cost}</TableCell>
     </MUITableRow>

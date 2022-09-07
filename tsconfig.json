@@ -11,7 +11,7 @@
     "esModuleInterop": true,
 
     "strict": true,
-
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "importHelpers": true,
     "noUnusedLocals": true,
     "experimentalDecorators": false,

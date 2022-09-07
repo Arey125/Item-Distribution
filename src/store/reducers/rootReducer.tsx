@@ -4,25 +4,25 @@ import { Action, createReducer } from "@reduxjs/toolkit";
 import distributeItems from "./distributeItems";
 import initialState from "../initialState";
 import { APPEND, DELETE, DISTRIBUTE } from "../actionTypes";
-import { Payload, State, Table } from "../types";
+import { TPayload, TState, TTable } from "../types";
 
-function clearDistribution(table: Table): Table {
+function clearDistribution(table: TTable): TTable {
   return Object.fromEntries(
     Object.entries(table).map(([id, val]) => [id, { ...val, type: null }])
   );
 }
 
-const reducer = createReducer<State>(initialState, (builder) => {
+const reducer = createReducer<TState>(initialState, (builder) => {
   builder
-    .addCase(APPEND, (state: State, { item }: Payload & Action<"APPEND">) => {
+    .addCase(APPEND, (state: TState, { item }: TPayload & Action<"APPEND">) => {
       state.table = clearDistribution(state.table);
       state.table[uuid()] = { ...item, type: null };
     })
-    .addCase(DELETE, (state, { id }: Payload & Action<"DELETE">) => {
+    .addCase(DELETE, (state, { id }: TPayload & Action<"DELETE">) => {
       state.table = clearDistribution(state.table);
       delete state.table[id];
     })
-    .addCase(DISTRIBUTE, (state: State) => {
+    .addCase(DISTRIBUTE, (state: TState) => {
       state.table = clearDistribution(state.table);
       const entries = Object.entries(state.table);
       const values = entries.map(([, { cost }]) => cost);
@@ -32,7 +32,7 @@ const reducer = createReducer<State>(initialState, (builder) => {
         id,
         { ...val, type: types[indices[ind]] },
       ]);
-      state.table = Object.fromEntries(entriesWithDistribution) as Table;
+      state.table = Object.fromEntries(entriesWithDistribution) as TTable;
     });
 });
 

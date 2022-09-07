@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useRef } from "react";
+
 import {
   TableContainer,
   Paper,
@@ -8,15 +9,21 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-
-import type { State } from "../store";
+import { useAppSelector } from "../store";
 import TableRow from "./TableRow";
 
+const TABLE_CONTAINER_STYLE = { width: 300, marginTop: "10px" };
+
 export const Table = () => {
-  const table = useSelector((state: State) => Object.keys(state.table));
+  const rowIds = useAppSelector((state) => Object.keys(state.table));
+
+  let { current: val } = useRef(0);
+  val += 1;
+  // eslint-disable-next-line no-console
+  console.log(val);
 
   return (
-    <TableContainer sx={{ width: 300, marginTop: "10px" }} component={Paper}>
+    <TableContainer sx={TABLE_CONTAINER_STYLE} component={Paper}>
       <MUITable size="small">
         <TableHead>
           <MUITableRow>
@@ -25,8 +32,8 @@ export const Table = () => {
           </MUITableRow>
         </TableHead>
         <TableBody>
-          {table.map((rowID) => (
-            <TableRow key={rowID} id={rowID} />
+          {rowIds.map((id) => (
+            <TableRow key={id} id={id} />
           ))}
         </TableBody>
       </MUITable>

@@ -1,32 +1,32 @@
-type Item = {
+type TItem = {
   name: string;
   cost: number;
 };
 
-type Row = Item & {
+type TRow = TItem & {
   type: string | null;
 };
 
-type Table = {
-  [id: string]: Row;
+type TTable = {
+  [id: string]: TRow;
 };
 
-type State = {
-  table: Table;
+type TState = {
+  table: TTable;
 };
 
-type Append = {
+type TAppend = {
   type: "APPEND";
-  item: Item;
+  item: TItem;
 };
-type Delete = {
+type TDelete = {
   type: "DELETE";
   id: string;
 };
-type Distribute = {
+type TDistribute = {
   type: "DISTRIBUTE";
 };
 
-type Payload = Append | Delete | Distribute;
+type TPayload = TAppend | TDelete | TDistribute;
 
-export type { Row, Item, Table, State, Payload };
+export type { TRow, TItem, TTable, TState, TPayload };

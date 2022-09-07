@@ -1,7 +1,7 @@
 import React, { ChangeEventHandler } from "react";
 import { InputBaseComponentProps, TextField } from "@mui/material";
 
-type Props = {
+type TProps = {
   type: string;
   name: string;
   value: string;
@@ -13,7 +13,7 @@ const INPUT_PARAMS: InputBaseComponentProps = {
   pattern: "[0-9]*",
 };
 
-const LabeledInput = ({ type, name, value, setValue }: Props) => {
+const LabeledInput = ({ type, name, value, setValue }: TProps) => {
   // @ts-ignore
   const textChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value);

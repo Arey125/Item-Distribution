@@ -1,8 +1,7 @@
 type Sums = [number, number, number];
 type Values = number[];
 
-function metric(sums: Sums): number {
-  const [a, b, c] = sums;
+function metric([a, b, c]: Sums): number {
   return (a - b) * (a - b) + (a - c) * (a - c) + (b - c) * (b - c);
 }
 

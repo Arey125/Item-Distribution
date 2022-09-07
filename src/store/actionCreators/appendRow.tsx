@@ -1,7 +1,7 @@
 import { APPEND } from "../actionTypes";
-import { Item } from "../types";
+import { TItem } from "../types";
 
-export function appendRow(item: Item) {
+export function appendRow(item: TItem) {
   return {
     type: APPEND,
     item,
