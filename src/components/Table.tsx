@@ -12,11 +12,12 @@ import {
 import { useAppSelector } from "../store";
 import { TableRow } from "./TableRow";
 import { idSelector } from "./tableSlice";
+import { isEqual } from "./helpers";
 
 const TABLE_CONTAINER_STYLE = { width: 300, marginTop: "10px" };
 
 export const Table = () => {
-  const rowIdsSelected = useAppSelector(idSelector);
+  const rowIdsSelected = useAppSelector(idSelector, isEqual);
   const rowIds = useMemo(() => rowIdsSelected, [rowIdsSelected]);
 
   return (

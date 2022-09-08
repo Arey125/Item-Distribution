@@ -5,7 +5,7 @@ function metric([a, b, c]: Sums): number {
   return (a - b) * (a - b) + (a - c) * (a - c) + (b - c) * (b - c);
 }
 
-function distributeItems(
+export function distributeItems(
   values: Values,
   sums: Sums = [0, 0, 0],
   memo = new Map<string, [Sums, number[]]>()
@@ -42,4 +42,5 @@ function distributeItems(
   return [res, res_inds];
 }
 
-export { distributeItems };
+export const isEqual = (a: string[], b: string[]): boolean =>
+  a.length === b.length && a.every((value, index) => value === b[index]);
