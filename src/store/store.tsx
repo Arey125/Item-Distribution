@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
+import { persistReducer } from "redux-persist";
 // eslint-disable-next-line import/no-internal-modules
 import storage from "redux-persist/lib/storage";
 // eslint-disable-next-line import/no-internal-modules
 import hardSet from "redux-persist/lib/stateReconciler/hardSet";
-// eslint-disable-next-line import/no-internal-modules
 
-import { reducer } from "./reducers";
+// eslint-disable-next-line import/no-internal-modules
+import { tableReducer } from "../components/tableSlice";
 
 const persistConfig = {
   key: "root",
@@ -14,10 +14,11 @@ const persistConfig = {
   stateReconciler: hardSet,
 };
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+// @ts-ignore
+const persistedTableReducer = persistReducer(persistConfig, tableReducer);
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: persistedTableReducer,
 });
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);

@@ -42,4 +42,4 @@ function distributeItems(
   return [res, res_inds];
 }
 
-export default distributeItems;
+export { distributeItems };

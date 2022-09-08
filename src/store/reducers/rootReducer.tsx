@@ -1,29 +1,30 @@
 import { v4 as uuid } from "uuid";
-import { Action, createReducer } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 
-import distributeItems from "./distributeItems";
+import { distributeItems } from "./distributeItems";
 import initialState from "../initialState";
-import { APPEND, DELETE, DISTRIBUTE } from "../actionTypes";
-import { TPayload, TState, TTable } from "../types";
+import { TState, TTable } from "../types";
+import { appendRow, deleteRow, distribute } from "../actionCreators";
 
-function clearDistribution(table: TTable): TTable {
-  return Object.fromEntries(
-    Object.entries(table).map(([id, val]) => [id, { ...val, type: null }])
-  );
+function clearDistribution(table: TTable): void {
+  Object.values(table).forEach((value) => {
+    // eslint-disable-next-line no-param-reassign
+    value.type = null;
+  });
 }
 
 const reducer = createReducer<TState>(initialState, (builder) => {
   builder
-    .addCase(APPEND, (state: TState, { item }: TPayload & Action<"APPEND">) => {
-      state.table = clearDistribution(state.table);
+    .addCase(appendRow, (state: TState, { payload: { item } }) => {
+      clearDistribution(state.table);
       state.table[uuid()] = { ...item, type: null };
     })
-    .addCase(DELETE, (state, { id }: TPayload & Action<"DELETE">) => {
-      state.table = clearDistribution(state.table);
+    .addCase(deleteRow, (state, { payload: { id } }) => {
+      clearDistribution(state.table);
       delete state.table[id];
     })
-    .addCase(DISTRIBUTE, (state: TState) => {
-      state.table = clearDistribution(state.table);
+    .addCase(distribute, (state: TState) => {
+      clearDistribution(state.table);
       const entries = Object.entries(state.table);
       const values = entries.map(([, { cost }]) => cost);
       const [, indices] = distributeItems(values);

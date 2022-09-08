@@ -1,8 +1,7 @@
-import { DELETE } from "../actionTypes";
+import { createAction } from "@reduxjs/toolkit";
 
-export function deleteRow(id: string) {
-  return {
-    type: DELETE,
+export const deleteRow = createAction("DELETE", (id: string) => ({
+  payload: {
     id,
-  };
-}
+  },
+}));

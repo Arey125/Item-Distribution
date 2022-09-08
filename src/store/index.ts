@@ -1,4 +1,12 @@
-export type { TRow, TItem, TTable, TState } from "./types";
+export type {
+  TRow,
+  TItem,
+  TTable,
+  TState,
+  TAppend,
+  TDelete,
+  TDistribute,
+} from "./types";
 
 export * from "./actionCreators";
 

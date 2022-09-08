@@ -1,7 +1,5 @@
-import { DISTRIBUTE } from "../actionTypes";
+import { createAction } from "@reduxjs/toolkit";
 
-export function distribute() {
-  return {
-    type: DISTRIBUTE,
-  };
-}
+export const distribute = createAction("DISTRIBUTE", () => ({
+  payload: {},
+}));

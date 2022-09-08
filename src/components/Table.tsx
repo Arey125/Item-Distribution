@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo } from "react";
 
 import {
   TableContainer,
@@ -10,17 +10,14 @@ import {
   TableBody,
 } from "@mui/material";
 import { useAppSelector } from "../store";
-import TableRow from "./TableRow";
+import { TableRow } from "./TableRow";
+import { idSelector } from "./tableSlice";
 
 const TABLE_CONTAINER_STYLE = { width: 300, marginTop: "10px" };
 
 export const Table = () => {
-  const rowIds = useAppSelector((state) => Object.keys(state.table));
-
-  let { current: val } = useRef(0);
-  val += 1;
-  // eslint-disable-next-line no-console
-  console.log(val);
+  const rowIdsSelected = useAppSelector(idSelector);
+  const rowIds = useMemo(() => rowIdsSelected, [rowIdsSelected]);
 
   return (
     <TableContainer sx={TABLE_CONTAINER_STYLE} component={Paper}>

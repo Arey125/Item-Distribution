@@ -15,17 +15,13 @@ type TState = {
   table: TTable;
 };
 
-type TAppend = {
-  type: "APPEND";
+export type TAppend = {
   item: TItem;
 };
-type TDelete = {
-  type: "DELETE";
+export type TDelete = {
   id: string;
 };
-type TDistribute = {
-  type: "DISTRIBUTE";
-};
+export type TDistribute = Record<string, never>;
 
 type TPayload = TAppend | TDelete | TDistribute;
 

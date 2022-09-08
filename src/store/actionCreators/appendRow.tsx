@@ -1,9 +1,8 @@
-import { APPEND } from "../actionTypes";
+import { createAction } from "@reduxjs/toolkit";
 import { TItem } from "../types";
 
-export function appendRow(item: TItem) {
-  return {
-    type: APPEND,
+export const appendRow = createAction("APPEND", (item: TItem) => ({
+  payload: {
     item,
-  };
-}
+  },
+}));

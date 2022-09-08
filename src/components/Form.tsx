@@ -1,17 +1,17 @@
 import { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
 import { Grid, Box, Button } from "@mui/material";
-import LabeledInput from "./LabeledInput";
+import { LabeledInput } from "./LabeledInput";
 
-import { appendRow, distribute } from "../store";
+import { appendRow, distribute } from "./tableSlice";
+import { useAppDispatch } from "../store";
 
 export const Form = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [name, setName] = useState("");
   const [cost, setCost] = useState("");
 
   const addLine = useCallback(() => {
-    dispatch(appendRow({ name, cost: Number(cost) }));
+    dispatch(appendRow({ item: { name, cost: Number(cost) } }));
   }, [name, cost, dispatch]);
 
   const distributeButtonCallback = useCallback(

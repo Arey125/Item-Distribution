@@ -29,4 +29,4 @@ const LabeledInput = ({ type, name, value, setValue }: TProps) => {
   );
 };
 
-export default LabeledInput;
+export { LabeledInput };
