@@ -11,7 +11,7 @@ export const Form = () => {
   const [cost, setCost] = useState("");
 
   const addLine = useCallback(() => {
-    dispatch(appendRow({ item: { name, cost: Number(cost) } }));
+    dispatch(appendRow({ name, cost: Number(cost) }));
   }, [name, cost, dispatch]);
 
   const distributeButtonCallback = useCallback(

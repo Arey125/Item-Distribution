@@ -31,7 +31,7 @@ const TableRow = ({ id }: TProps) => {
   const backgroundColor = type && ROW_STYLE[type];
 
   const deleteThisRow = useCallback(() => {
-    dispatch(deleteRow({ id }));
+    dispatch(deleteRow(id));
   }, [id, dispatch]);
 
   return (

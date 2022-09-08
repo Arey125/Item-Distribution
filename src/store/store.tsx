@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { persistReducer } from "redux-persist";
+import { persistReducer, persistStore } from "redux-persist";
 // eslint-disable-next-line import/no-internal-modules
 import storage from "redux-persist/lib/storage";
 // eslint-disable-next-line import/no-internal-modules
@@ -21,4 +21,4 @@ export const store = configureStore({
   reducer: persistedTableReducer,
 });
 
-// export const persistor = persistStore(store);
+export const persistor = persistStore(store);

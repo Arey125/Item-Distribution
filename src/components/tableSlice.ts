@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
-import type { TTable, TAppend, TDelete, TState } from "../store";
+import type { TTable, TAppend, TDelete, TState, TItem } from "../store";
 
-// eslint-disable-next-line import/no-internal-modules
-import { distributeItems } from "../store/reducers/distributeItems";
+import { distributeItems } from "./helpers";
 
 function clearDistribution(table: TTable): void {
   Object.values(table).forEach((value) => {
@@ -20,15 +19,23 @@ const tableSlice = createSlice({
   name: "table",
   initialState: { table: {} },
   reducers: {
-    appendRow(state: TState, { payload: { item } }: PayloadType<TAppend>) {
-      clearDistribution(state.table);
-      state.table[uuid()] = { ...item, type: null };
+    appendRow: {
+      reducer: (state: TState, { payload: { item } }: PayloadType<TAppend>) => {
+        clearDistribution(state.table);
+        state.table[uuid()] = { ...item, type: null };
+      },
+      prepare: (item: TItem) => ({
+        payload: { item },
+      }),
     },
-    deleteRow(state: TState, { payload: { id } }: PayloadType<TDelete>) {
-      clearDistribution(state.table);
-      delete state.table[id];
+    deleteRow: {
+      reducer: (state: TState, { payload: { id } }: PayloadType<TDelete>) => {
+        clearDistribution(state.table);
+        delete state.table[id];
+      },
+      prepare: (id: string) => ({ payload: { id } }),
     },
-    distribute(state: TState) {
+    distribute: (state: TState) => {
       clearDistribution(state.table);
       const entries = Object.entries(state.table);
       const values = entries.map(([, { cost }]) => cost);
