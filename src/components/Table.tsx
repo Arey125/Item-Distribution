@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 import {
   TableContainer,
   Paper,
@@ -17,8 +15,7 @@ import { isEqual } from "./helpers";
 const TABLE_CONTAINER_STYLE = { width: 300, marginTop: "10px" };
 
 export const Table = () => {
-  const rowIdsSelected = useAppSelector(idSelector, isEqual);
-  const rowIds = useMemo(() => rowIdsSelected, [rowIdsSelected]);
+  const rowIds = useAppSelector(idSelector, isEqual);
 
   return (
     <TableContainer sx={TABLE_CONTAINER_STYLE} component={Paper}>

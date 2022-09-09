@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuid } from "uuid";
-import type { TTable, TAppend, TDelete, TState, TItem } from "../store";
+import type { TTable, TAppend, TDelete, TItem, TRootState } from "../store";
 
 import { distributeItems } from "./helpers";
 
@@ -17,30 +17,32 @@ type PayloadType<T> = {
 
 const tableSlice = createSlice({
   name: "table",
-  initialState: { table: {} },
+  initialState: {} as TTable,
   reducers: {
     appendRow: {
-      reducer: (state: TState, { payload: { item } }: PayloadType<TAppend>) => {
-        clearDistribution(state.table);
-        state.table[uuid()] = { ...item, type: null };
+      reducer: (table: TTable, { payload: { item } }: PayloadType<TAppend>) => {
+        clearDistribution(table);
+        // eslint-disable-next-line no-param-reassign
+        table[uuid()] = { ...item, type: null };
       },
       prepare: (item: TItem) => ({
         payload: { item },
       }),
     },
     deleteRow: {
-      reducer: (state: TState, { payload: { id } }: PayloadType<TDelete>) => {
-        clearDistribution(state.table);
-        delete state.table[id];
+      reducer: (table: TTable, { payload: { id } }: PayloadType<TDelete>) => {
+        clearDistribution(table);
+        // eslint-disable-next-line no-param-reassign
+        delete table[id];
       },
       prepare: (id: string) => ({ payload: { id } }),
     },
-    distribute: (state: TState) => {
-      clearDistribution(state.table);
-      const entries = Object.entries(state.table);
+    distribute: (table: TTable) => {
+      clearDistribution(table);
+      const entries = Object.entries(table);
       const values = entries.map(([, { cost }]) => cost);
       const [, indices] = distributeItems(values);
-      const types = ["red", "green", "blue"];
+      const types = ["red", "green", "blue"] as const;
       entries.forEach(([, val], ind) => {
         // eslint-disable-next-line no-param-reassign
         val.type = types[indices[ind]];
@@ -54,4 +56,4 @@ const { actions, reducer } = tableSlice;
 export const { appendRow, deleteRow, distribute } = actions;
 export { reducer as tableReducer };
 
-export const idSelector = (state: TState) => Object.keys(state.table);
+export const idSelector = (state: TRootState) => Object.keys(state.table);

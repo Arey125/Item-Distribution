@@ -2,10 +2,10 @@ export type {
   TRow,
   TItem,
   TTable,
-  TState,
   TAppend,
   TDelete,
   TDistribute,
+  TRootState,
 } from "./types";
 
 export { store } from "./store";

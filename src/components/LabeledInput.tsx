@@ -14,7 +14,6 @@ const INPUT_PARAMS: InputBaseComponentProps = {
 };
 
 const LabeledInput = ({ type, name, value, setValue }: TProps) => {
-  // @ts-ignore
   const textChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value);
   };

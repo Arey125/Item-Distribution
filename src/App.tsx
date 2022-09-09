@@ -5,12 +5,12 @@ import { Table, Form } from "./components";
 import { store } from "./store";
 
 const App = () => (
-  <div className="App">
-    <Provider store={store}>
+  <Provider store={store}>
+    <div className="App">
       <Form />
       <Table />
-    </Provider>
-  </div>
+    </div>
+  </Provider>
 );
 
 export { App };
