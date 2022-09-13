@@ -1,0 +1,1 @@
+export { distribute } from "./action";

@@ -1,5 +1,7 @@
-import { AnyAction } from "redux";
-
+import { isEqual } from "../../libs";
+import { IdSelector } from "../../model";
+import { Row } from "./row";
+// eslint-disable-next-line import/order
 import {
   TableContainer,
   Paper,
@@ -9,13 +11,12 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-// eslint-disable-next-line import/no-internal-modules
+// eslint-disable-next-line import/order,import/no-internal-modules
 import { useAppSelector } from "app/store";
-import { Row } from "./row";
-import { IdSelector } from "../../model";
-import { isEqual } from "../../libs";
+// eslint-disable-next-line import/order
+import { AnyAction } from "redux";
 
-const TABLE_CONTAINER_STYLE = { width: 300, marginTop: "10px" };
+const TABLE_CONTAINER_STYLE = { marginTop: "10px" };
 
 type TProps = {
   remove: (id: string) => AnyAction;

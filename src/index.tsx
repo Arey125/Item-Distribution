@@ -1,17 +1,10 @@
+import { App } from "app";
 import React from "react";
-// eslint-disable-next-line import/no-internal-modules
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom";
 
-import "./index.css";
-import { App } from "./app";
-
-const container = document.getElementById("root");
-if (container === null) {
-  throw new Error();
-}
-const root = createRoot(container);
-root.render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById("root")
 );

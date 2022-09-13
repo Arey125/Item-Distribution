@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-internal-modules
-import { TRootState } from "../../../../app/store";
+import { TRootState } from "app/store";
 
 export const IdSelector = (state: TRootState) => Object.keys(state.items);
 
