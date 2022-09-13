@@ -3,22 +3,38 @@
     "target": "ES6",
     "module": "ES6",
     "moduleResolution": "node",
-    "lib": ["DOM", "ES7", "ES2017", "ES2018", "ES2019", "dom.iterable"],
+    "lib": [
+      "DOM",
+      "ES7",
+      "ES2017",
+      "ES2018",
+      "ES2019",
+      "dom.iterable"
+    ],
     "outDir": "./dist",
     "jsx": "react-jsx",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-
     "strict": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ],
     "importHelpers": true,
     "noUnusedLocals": true,
     "experimentalDecorators": false,
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"],
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "typeRoots": [
+      "typings/**/*.d.ts",
+      "node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
     "src/**/*",
@@ -28,5 +44,8 @@
     "./node_modules/@types",
     "jest.config.ts"
   ],
-  "exclude": ["**/*.js"]
+  "exclude": [
+    "**/*.js"
+  ],
+  "extends": "./tsconfig.paths.json"
 }
